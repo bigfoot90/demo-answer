@@ -1,0 +1,5 @@
+AppBundle\Entity\Question:
+    question__{1..10}:
+        title: <sentence(6)>
+        content: <paragraph(3)>
+        createdBy: <name()>

@@ -1,0 +1,6 @@
+AppBundle\Entity\Answer:
+    answer__{1..100}:
+        question: @question__*
+        title: <sentence(6)>
+        content: <paragraph(3)>
+        createdBy: <name()>

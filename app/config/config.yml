@@ -66,6 +66,9 @@ doctrine:
         #   3. Uncomment next line:
         #     path:     "%database_path%"
 
+        types:
+            json: Sonata\Doctrine\Types\JsonType
+
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
@@ -73,8 +76,41 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
+    transport:  "%mailer_transport%"
+    host:       "%mailer_host%"
+    username:   "%mailer_user%"
+    password:   "%mailer_password%"
+    spool:      { type: memory }
+
+sonata_media:
+    db_driver: doctrine_orm
+    default_context: default
+
+    contexts:
+        default:  # the default context is mandatory
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+                - sonata.media.provider.file
+
+            formats:
+                small: { width: 100 , quality: 70}
+                big:   { width: 500 , quality: 70}
+
+    cdn:
+        server:
+            path: /uploads
+
+    filesystem:
+        local:
+            directory:  %kernel.root_dir%/../web/uploads
+            create:     true
+
+hautelook_alice:
+    db_drivers:
+        orm: ~
+    locale: en_US
+    seed: 1
+    persist_once: false
+    loading_limit: 5

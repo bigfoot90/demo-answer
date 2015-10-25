@@ -17,10 +17,14 @@
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "^3.0.2",
-        "incenteev/composer-parameter-handler": "~2.0"
+        "incenteev/composer-parameter-handler": "~2.0",
+        "sonata-project/media-bundle": "^2.3",
+        "jms/serializer-bundle": "^1.0",
+        "doctrine/doctrine-fixtures-bundle": "^2.2"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
+        "sensio/generator-bundle": "~2.3",
+        "hautelook/alice-bundle": "^1.0"
     },
     "scripts": {
         "post-install-cmd": [
