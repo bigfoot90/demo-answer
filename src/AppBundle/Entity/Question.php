@@ -41,14 +41,14 @@ class Question
     /**
      * @var ArrayCollection|QuestionMedia[]
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\QuestionMedia", mappedBy="question")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\QuestionMedia", mappedBy="question", cascade={"all"}, orphanRemoval=true)
      */
     protected $attachments;
 
     /**
      * @var ArrayCollection|Answer[]
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Answer", mappedBy="question")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Answer", mappedBy="question", cascade={"persist"})
      */
     protected $answers;
 

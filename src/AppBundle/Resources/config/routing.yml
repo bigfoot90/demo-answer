@@ -1,0 +1,11 @@
+question:
+    prefix:   /question
+    resource: @AppBundle/Resources/config/routing/question.yml
+
+answer:
+    prefix:   /answer
+    resource: @AppBundle/Resources/config/routing/answer.yml
+
+comment:
+    prefix:   /comment
+    resource: @AppBundle/Resources/config/routing/comment.yml

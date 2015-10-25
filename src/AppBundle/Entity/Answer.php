@@ -28,6 +28,7 @@ class Answer
      * @var Question
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Question", inversedBy="answers")
+     * @ORM\JoinColumn(onDelete="cascade")
      */
     protected $question;
 
@@ -48,14 +49,14 @@ class Answer
     /**
      * @var ArrayCollection|AnswerMedia[]
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\AnswerMedia", mappedBy="answer")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\AnswerMedia", mappedBy="answer", cascade={"all"}, orphanRemoval=true)
      */
     protected $attachments;
 
     /**
      * @var ArrayCollection|Comment[]
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="answer")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="answer", cascade={"persist"})
      */
     protected $comments;
 

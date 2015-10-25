@@ -20,8 +20,7 @@
 
     <testsuites>
         <testsuite name="Project Test Suite">
-            <directory>src/*/*/*Bundle/Tests</directory>
-            <directory>src/*/*Bundle/Tests</directory>
+            <directory>src/AppBundle/Tests</directory>
         </testsuite>
     </testsuites>
 
@@ -29,24 +28,10 @@
         <whitelist>
             <directory>src</directory>
             <exclude>
-                <directory>src/*/*/*Bundle/Resources</directory>
-                <directory>src/*/*/*Bundle/Tests</directory>
-                <directory>src/*/*Bundle/Resources</directory>
-                <directory>src/*/*Bundle/Tests</directory>
+                <directory>src/*Bundle/Resources</directory>
+                <directory>src/*Bundle/Tests</directory>
             </exclude>
         </whitelist>
     </filter>
-
-    <listeners>
-        <listener class="PHPUnit\Runner\CleverAndSmart\TestListener">
-            <arguments>
-                <object class="PHPUnit\Runner\CleverAndSmart\Storage\Sqlite3Storage">
-                    <arguments>
-                        <string>app/cache/.phpunit-cas.db</string>
-                    </arguments>
-                </object>
-            </arguments>
-        </listener>
-    </listeners>
 
 </phpunit>

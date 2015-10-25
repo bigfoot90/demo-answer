@@ -1,0 +1,4 @@
+answer_index:
+    path: /
+    method: GET
+    defaults: { _controller: AppBundle:Answer:index }

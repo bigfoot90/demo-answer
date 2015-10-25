@@ -1,7 +1,3 @@
-media:
-    resource: @SonataMediaBundle/Resources/config/routing/media.xml
-    prefix: /media
-
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
+alda.admin:
+    prefix:   /api
+    resource: @AppBundle/Resources/config/routing.yml

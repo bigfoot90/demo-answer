@@ -27,6 +27,7 @@ class Comment
      * @var Answer
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Answer", inversedBy="comments")
+     * @ORM\JoinColumn(onDelete="cascade")
      */
     protected $answer;
 
@@ -40,7 +41,7 @@ class Comment
     /**
      * @var ArrayCollection|CommentMedia[]
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\CommentMedia", mappedBy="comment")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\CommentMedia", mappedBy="comment", cascade={"all"}, orphanRemoval=true)
      */
     protected $attachments;
 
