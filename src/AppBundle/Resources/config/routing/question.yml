@@ -1,4 +1,24 @@
 question_index:
     path: /
-    method: GET
+    methods: GET
     defaults: { _controller: AppBundle:Question:index }
+
+question_show:
+    path: /{id}
+    methods: GET
+    defaults: { _controller: AppBundle:Question:show }
+
+question_create:
+    path: /
+    methods: POST
+    defaults: { _controller: AppBundle:Question:create }
+
+question_update:
+    path: /{id}
+    methods: PUT|PATH
+    defaults: { _controller: AppBundle:Question:update }
+
+question_remove:
+    path: /{id}
+    methods: DELETE
+    defaults: { _controller: AppBundle:Question:remove }

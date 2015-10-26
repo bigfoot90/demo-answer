@@ -8,6 +8,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as SER;
 
 /**
  * @ORM\Table()
@@ -21,6 +23,9 @@ class Question
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer", options={"unsigned"=true})
+     *
+     * @SER\Type("integer")
+     * @SER\ReadOnly()
      */
     protected $id;
 
@@ -28,6 +33,8 @@ class Question
      * @var string
      *
      * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank()
      */
     protected $title;
 
@@ -35,6 +42,8 @@ class Question
      * @var string
      *
      * @ORM\Column(type="text")
+     *
+     * @Assert\NotBlank()
      */
     protected $content;
 
@@ -42,6 +51,8 @@ class Question
      * @var ArrayCollection|QuestionMedia[]
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\QuestionMedia", mappedBy="question", cascade={"all"}, orphanRemoval=true)
+     *
+     * @SER\SerializedName("files")
      */
     protected $attachments;
 
@@ -49,6 +60,8 @@ class Question
      * @var ArrayCollection|Answer[]
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Answer", mappedBy="question", cascade={"persist"})
+     *
+     * @SER\Exclude()
      */
     protected $answers;
 
@@ -56,6 +69,8 @@ class Question
      * @var string
      *
      * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank()
      */
     protected $createdBy;
 
@@ -63,6 +78,8 @@ class Question
      * @var \DateTime
      *
      * @ORM\Column(type="datetime")
+     *
+     * @SER\ReadOnly()
      */
     protected $createdAt;
 
@@ -114,7 +131,7 @@ class Question
     }
 
     /**
-     * @return ArrayCollection|QuestionMedia[]
+     * @return ArrayCollection|CommentMedia[]
      */
     public function getAttachments()
     {
@@ -122,23 +139,23 @@ class Question
     }
 
     /**
-     * @param QuestionMedia $attachment
+     * @param QuestionMedia $media
      */
-    public function addAttachment(QuestionMedia $attachment)
+    public function addAttachment(QuestionMedia $media)
     {
-        if (!$this->attachments->contains($attachment)) {
-            $this->attachments->add($attachment);
-            $attachment->setQuestion($this);
+        if (!$this->attachments->contains($media)) {
+            $this->attachments->add($media);
+            $media->setQuestion($this);
         }
     }
 
     /**
-     * @param QuestionMedia $attachment
+     * @param QuestionMedia $media
      */
-    public function removeAttachment(QuestionMedia $attachment)
+    public function removeAttachment(QuestionMedia $media)
     {
-        if ($this->attachments->contains($attachment)) {
-            $this->attachments->removeElement($attachment);
+        if ($this->attachments->contains($media)) {
+            $this->attachments->removeElement($media);
         }
     }
 

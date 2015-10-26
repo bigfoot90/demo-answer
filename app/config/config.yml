@@ -107,10 +107,15 @@ sonata_media:
             directory:  %kernel.root_dir%/../web/uploads
             create:     true
 
+fos_rest:
+    routing_loader:
+        default_format: json
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: true
+    view:
+        view_response_listener: 'force'
+
 hautelook_alice:
-    db_drivers:
-        orm: ~
     locale: en_US
     seed: 1
-    persist_once: false
-    loading_limit: 5
