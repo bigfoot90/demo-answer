@@ -84,10 +84,10 @@ swiftmailer:
 
 sonata_media:
     db_driver: doctrine_orm
-    default_context: default
+    default_context: attachment
 
     contexts:
-        default:  # the default context is mandatory
+        attachment:  # the default context is mandatory
             providers:
                 - sonata.media.provider.dailymotion
                 - sonata.media.provider.youtube
@@ -115,7 +115,3 @@ fos_rest:
     format_listener: true
     view:
         view_response_listener: 'force'
-
-hautelook_alice:
-    locale: en_US
-    seed: 1

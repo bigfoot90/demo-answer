@@ -6,6 +6,8 @@
 
 namespace AppBundle\Tests\Controller;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 class AnswerControllerTest extends WebTestCase
 {
     protected static $fixtures = array(
@@ -95,6 +97,36 @@ class AnswerControllerTest extends WebTestCase
 
         $content = json_decode($response->getContent());
         $this->assertEquals('Content updated', $content->content);
+    }
+
+    public function testUpload()
+    {
+        $this->loadFixtureFiles(static::$fixtures);
+
+        $file_path = __DIR__.'/resources/test.file';
+        $file_content = file_get_contents($file_path);
+        $file = new UploadedFile($file_path, 'test.file', 'application/octet-stream', strlen($file_content));
+
+        $route =  $this->getUrl('answer_upload', array('id' => 1));
+        $this->client->request('POST', $route, array(), array($file));
+        $response = $this->client->getResponse();
+        $this->assertJsonResponse($response, 201);
+
+        $content = json_decode($response->getContent());
+        $this->assertNotEmpty($content->url);
+
+
+
+        // Check that file has been uploaded correctly
+        $root_directory = $this->getContainer()->getParameter('kernel.root_dir').'/..';
+        $uploaded_file_path = $root_directory.'/web'.$content->url;
+
+        $this->assertEquals($file_content, file_get_contents($uploaded_file_path));
+
+
+
+        // Clear file system from the uploaded test file
+        unlink($uploaded_file_path);
     }
 
     public function testRemove()

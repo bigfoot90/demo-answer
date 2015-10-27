@@ -12,8 +12,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as SER;
 
 /**
- * @ORM\Table()
- * @ORM\Entity()
+ * @ORM\Table(
+ *  uniqueConstraints={
+ *      @ORM\UniqueConstraint(columns={"title"})
+ *  },
+ *  indexes={
+ *      @ORM\Index(columns={"searches_count"}),
+ *      @ORM\Index(columns={"views_count"}),
+ *      @ORM\Index(columns={"created_at"}),
+ *  }
+ * )
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\QuestionRepository")
  */
 class Question
 {
@@ -48,9 +57,9 @@ class Question
     protected $content;
 
     /**
-     * @var ArrayCollection|QuestionMedia[]
+     * @var ArrayCollection|QuestionAttachment[]
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\QuestionMedia", mappedBy="question", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\QuestionAttachment", mappedBy="question", cascade={"all"}, orphanRemoval=true)true)
      *
      * @SER\SerializedName("files")
      */
@@ -64,6 +73,24 @@ class Question
      * @SER\Exclude()
      */
     protected $answers;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     *
+     * @SER\Exclude()
+     */
+    protected $searchesCount;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     *
+     * @SER\Exclude()
+     */
+    protected $viewsCount;
 
     /**
      * @var string
@@ -88,6 +115,8 @@ class Question
         $this->answers = new ArrayCollection();
         $this->attachments = new ArrayCollection();
         $this->createdAt = new \DateTime();
+        $this->searchesCount = 0;
+        $this->viewsCount = 0;
     }
 
     /**
@@ -131,7 +160,7 @@ class Question
     }
 
     /**
-     * @return ArrayCollection|CommentMedia[]
+     * @return ArrayCollection|CommentAttachment[]
      */
     public function getAttachments()
     {
@@ -139,23 +168,23 @@ class Question
     }
 
     /**
-     * @param QuestionMedia $media
+     * @param QuestionAttachment $attachment
      */
-    public function addAttachment(QuestionMedia $media)
+    public function addAttachment(QuestionAttachment $attachment)
     {
-        if (!$this->attachments->contains($media)) {
-            $this->attachments->add($media);
-            $media->setQuestion($this);
+        if (!$this->attachments->contains($attachment)) {
+            $this->attachments->add($attachment);
+            $attachment->setQuestion($this);
         }
     }
 
     /**
-     * @param QuestionMedia $media
+     * @param QuestionAttachment $attachment
      */
-    public function removeAttachment(QuestionMedia $media)
+    public function removeAttachment(QuestionAttachment $attachment)
     {
-        if ($this->attachments->contains($media)) {
-            $this->attachments->removeElement($media);
+        if ($this->attachments->contains($attachment)) {
+            $this->attachments->removeElement($attachment);
         }
     }
 
@@ -186,6 +215,32 @@ class Question
         if ($this->answers->contains($answer)) {
             $this->answers->removeElement($answer);
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getSearchesCount()
+    {
+        return $this->searchesCount;
+    }
+
+    public function incSearchesCount()
+    {
+        $this->searchesCount++;
+    }
+
+    /**
+     * @return int
+     */
+    public function getViewsCount()
+    {
+        return $this->viewsCount;
+    }
+
+    public function incViewsCount()
+    {
+        $this->viewsCount++;
     }
 
     /**

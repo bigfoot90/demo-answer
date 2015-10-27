@@ -22,13 +22,13 @@ class WebTestCase extends BaseWebTestCase
         $this->client = static::createClient();
     }
 
-    protected function assertJsonResponse(Response $response, $statusCode = 200)
+    protected function assertJsonResponse(Response $response, $statusCode = 200, $message = null)
     {
         $content = $response->getContent();
 
         $this->assertEquals(
             $statusCode, $response->getStatusCode(),
-            $content
+            $message ?: $content
         );
 
         if ($statusCode != 204) {

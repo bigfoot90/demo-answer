@@ -1,10 +1,11 @@
 /bin/
 /vendor/
-/web/bundles/
 /app/logs/
 /app/cache/
 /app/config/parameters.yml
 /app/bootstrap.php.cache
+/web/bundles/
+/web/uploads/
 /phpunit.xml
 /.idea/
 **/.DS_Store

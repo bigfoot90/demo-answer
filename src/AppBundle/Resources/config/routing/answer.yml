@@ -15,8 +15,13 @@ answer_create:
 
 answer_update:
     path: /{id}
-    methods: PUT|PATH
+    methods: [PUT, PATCH]
     defaults: { _controller: AppBundle:Answer:update }
+
+answer_upload:
+    path: /{id}/upload
+    methods: POST
+    defaults: { _controller: AppBundle:Answer:upload }
 
 answer_remove:
     path: /{id}

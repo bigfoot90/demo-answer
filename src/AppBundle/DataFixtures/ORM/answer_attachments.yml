@@ -1,0 +1,3 @@
+AppBundle\Entity\AnswerAttachment:
+    answer_attachment__{1..10} (extends attachment):
+        answer: @answer__*

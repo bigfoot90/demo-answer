@@ -1,0 +1,5 @@
+AppBundle\Entity\Attachment:
+    attachment (template):
+        binaryContent: <file('../resources/attachments/image.png')>
+        context: attachment
+        enabled: true

@@ -1,0 +1,3 @@
+AppBundle\Entity\QuestionAttachment:
+    question_attachment__{1..10} (extends attachment):
+        question: @question__*

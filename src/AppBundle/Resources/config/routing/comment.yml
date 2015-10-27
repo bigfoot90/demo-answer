@@ -15,8 +15,13 @@ comment_create:
 
 comment_update:
     path: /{id}
-    methods: PUT|PATH
+    methods: [PUT, PATCH]
     defaults: { _controller: AppBundle:Comment:update }
+
+comment_upload:
+    path: /{id}/upload
+    methods: POST
+    defaults: { _controller: AppBundle:Comment:upload }
 
 comment_remove:
     path: /{id}

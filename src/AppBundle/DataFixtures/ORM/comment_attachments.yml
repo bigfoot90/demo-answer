@@ -1,0 +1,3 @@
+AppBundle\Entity\CommentAttachment:
+    comment_attachment__{1..10} (extends attachment):
+        comment: @comment__*

@@ -25,3 +25,8 @@ swiftmailer:
 
 liip_functional_test:
     cache_sqlite_db: true
+
+hautelook_alice:
+    locale: en_US
+    seed: 1
+    loading_limit: 60

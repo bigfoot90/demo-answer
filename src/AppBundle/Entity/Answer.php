@@ -60,9 +60,9 @@ class Answer
     protected $content;
 
     /**
-     * @var ArrayCollection|AnswerMedia[]
+     * @var ArrayCollection|AnswerAttachment[]
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\AnswerMedia", mappedBy="answer", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\AnswerAttachment", mappedBy="answer", cascade={"all"}, orphanRemoval=true)
      *
      * @SER\SerializedName("files")
      */
@@ -157,7 +157,7 @@ class Answer
     }
 
     /**
-     * @return ArrayCollection|CommentMedia[]
+     * @return ArrayCollection|CommentAttachment[]
      */
     public function getAttachments()
     {
@@ -165,23 +165,23 @@ class Answer
     }
 
     /**
-     * @param QuestionMedia $media
+     * @param QuestionAttachment $attachment
      */
-    public function addAttachment(QuestionMedia $media)
+    public function addAttachment(QuestionAttachment $attachment)
     {
-        if (!$this->attachments->contains($media)) {
-            $this->attachments->add($media);
-            $media->setQuestion($this);
+        if (!$this->attachments->contains($attachment)) {
+            $this->attachments->add($attachment);
+            $attachment->setQuestion($this);
         }
     }
 
     /**
-     * @param QuestionMedia $media
+     * @param QuestionAttachment $attachment
      */
-    public function removeAttachment(QuestionMedia $media)
+    public function removeAttachment(QuestionAttachment $attachment)
     {
-        if ($this->attachments->contains($media)) {
-            $this->attachments->removeElement($media);
+        if ($this->attachments->contains($attachment)) {
+            $this->attachments->removeElement($attachment);
         }
     }
 

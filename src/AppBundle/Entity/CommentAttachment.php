@@ -7,16 +7,19 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
  */
-class CommentMedia extends Media
+class CommentAttachment extends Attachment
 {
     /**
      * @var Comment
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Comment", inversedBy="attachments")
+     *
+     * @Assert\NotNull()
      */
     protected $comment;
 

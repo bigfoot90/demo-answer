@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
+use AppBundle\Entity\Attachment;
+
 class RestController extends Controller
 {
     /**
@@ -27,6 +29,15 @@ class RestController extends Controller
     protected function resourceUpdatedResponse()
     {
         return new JsonResponse(null, JsonResponse::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @param Attachment $attachment
+     * @return JsonResponse
+     */
+    protected function resourceUploadedResponse(Attachment $attachment)
+    {
+        return new JsonResponse(array('url' => $this->getAttachmentPublicUrl($attachment, 'reference')), JsonResponse::HTTP_CREATED);
     }
 
     /**
@@ -63,5 +74,12 @@ class RestController extends Controller
     protected function validate($entity)
     {
         return $this->get('validator')->validate($entity);
+    }
+
+    protected function getAttachmentPublicUrl(Attachment $attachment, $format = null)
+    {
+        $provider = $this->container->get($attachment->getProviderName());
+
+        return $provider->generatePublicUrl($attachment, $format);
     }
 }
