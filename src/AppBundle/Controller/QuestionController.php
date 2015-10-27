@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @author Damian Dlugosz <d.dlugosz@bestnetwork.it>
+ * @author Damian Dlugosz <bigfootdd@gmail.com>
  */
 
 namespace AppBundle\Controller;
