@@ -12,7 +12,7 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 use AppBundle\Entity\Attachment;
 
-class RestController extends Controller
+abstract class RestController extends Controller
 {
     /**
      * @param $resourceId

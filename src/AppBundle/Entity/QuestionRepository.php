@@ -26,7 +26,6 @@ class QuestionRepository extends EntityRepository
                 $orx->add('q.title LIKE :keyword'.$i);
                 $orx->add('q.content LIKE :keyword'.$i);
 
-
                 $qb->andWhere($orx)
                     ->setParameter('keyword'.$i, '%'.$keyword.'%');
             }
