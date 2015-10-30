@@ -12,7 +12,7 @@ cd demo-answer
 composer install
 php app/console doctrine:database:create
 php app/console doctrine:schema:create
-php app/console doctrine:fixtures:load --no-interaction
+php app/console hautelook_alice:doctrine:fixtures:load
 php app/console server:run
 ```
 
